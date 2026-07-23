@@ -1,0 +1,622 @@
+<meta charset="utf-8">
+<title>Before App Store Launch Checklist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TEMPLATE CONTRACT — READ THIS IF YOU ARE AN AI ASSISTANT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+This checklist is a shared, reusable template. When a user asks you to
+personalize it for their project:
+
+EDIT ONLY the values inside the PERSONALIZE block — the
+<script id="project-config"> element directly below this comment.
+
+  appName    the user's app name, e.g. "Luma"
+             (pre-fills the progress tracker and the backup-name example)
+  bundleId   the app's bundle identifier, e.g. "com.jane.luma"
+  sku        the App Store Connect SKU, e.g. "LUMA001"
+  productId  the main in-app purchase / subscription product ID,
+             e.g. "com.jane.luma.pro.monthly" — leave "" for free apps
+
+Leave any field as "" to keep its generic placeholder text.
+
+ALSO RECOMMENDED: set the <title> tag's text to
+"<AppName> — App Store Launch Checklist" (e.g. "Luma — App Store
+Launch Checklist") so the personalized copy is distinguishable in
+browser tabs and file lists. (The page also sets the tab title from
+appName at runtime, so this step is a fallback for static contexts.)
+
+DO NOT change anything else. Do not add, remove, reorder, or reword
+checklist items, phases, traps, or any other text; do not edit any other
+script, style, or markup. At load time the page injects these values
+into the elements marked data-fill="…" automatically — filling the
+config block is the only edit needed.
+
+Deliver the personalized copy to the user as a NEW page or file of
+their own. Never modify or republish the shared template itself.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
+
+<script id="project-config">
+/* ═══════════ PERSONALIZE (edit ONLY the values below) ═══════════ */
+window.PROJECT = {
+  appName:   "",   /* e.g. "Luma"                       */
+  bundleId:  "",   /* e.g. "com.jane.luma"              */
+  sku:       "",   /* e.g. "LUMA001"                    */
+  productId: ""    /* e.g. "com.jane.luma.pro.monthly"  */
+};
+/* ═══════ Everything outside this block is fixed structure ═══════ */
+</script>
+
+<style>
+  :root {
+    color-scheme: light dark;
+    /* Light — cool paper biased toward the teal accent */
+    --paper: #f3f6f4;
+    --card: #ffffff;
+    --card-2: #eef2f0;
+    --line: #dde4e1;
+    --ink: #182428;
+    --soft: #47585e;
+    --faint: #7e9096;
+    --teal: #0d7a6c;        /* action & done */
+    --teal-dim: rgba(13, 122, 108, 0.10);
+    --amber: #9a6410;       /* waiting on Apple */
+    --amber-dim: rgba(176, 118, 22, 0.12);
+    --red: #bd3f50;         /* traps */
+    --red-dim: rgba(189, 63, 80, 0.08);
+    --radius: 14px;
+    --maxw: 720px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0e1517;
+      --card: #141d20;
+      --card-2: #1a2529;
+      --line: #263539;
+      --ink: #e6edeb;
+      --soft: #a3b8b6;
+      --faint: #67807f;
+      --teal: #2fbfa4;
+      --teal-dim: rgba(47, 191, 164, 0.13);
+      --amber: #dfa348;
+      --amber-dim: rgba(223, 163, 72, 0.13);
+      --red: #ee6577;
+      --red-dim: rgba(238, 101, 119, 0.10);
+    }
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --paper: #f3f6f4; --card: #ffffff; --card-2: #eef2f0; --line: #dde4e1;
+    --ink: #182428; --soft: #47585e; --faint: #7e9096;
+    --teal: #0d7a6c; --teal-dim: rgba(13,122,108,0.10);
+    --amber: #9a6410; --amber-dim: rgba(176,118,22,0.12);
+    --red: #bd3f50; --red-dim: rgba(189,63,80,0.08);
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0e1517; --card: #141d20; --card-2: #1a2529; --line: #263539;
+    --ink: #e6edeb; --soft: #a3b8b6; --faint: #67807f;
+    --teal: #2fbfa4; --teal-dim: rgba(47,191,164,0.13);
+    --amber: #dfa348; --amber-dim: rgba(223,163,72,0.13);
+    --red: #ee6577; --red-dim: rgba(238,101,119,0.10);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  code {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.86em;
+    background: var(--card-2);
+    border: 1px solid var(--line);
+    padding: 1px 6px;
+    border-radius: 6px;
+    word-break: break-word;
+  }
+  a { color: var(--teal); text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible, input[type="text"]:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: clamp(26px, 5vw, 56px) clamp(16px, 4vw, 32px) 72px; }
+
+  /* ---------- Masthead ---------- */
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--teal); margin: 0 0 16px;
+  }
+  h1 {
+    font-size: clamp(30px, 6.4vw, 44px);
+    font-weight: 750; line-height: 1.06; letter-spacing: -0.025em;
+    margin: 0 0 14px; text-wrap: balance;
+  }
+  .lede { color: var(--soft); font-size: 16.5px; max-width: 56ch; margin: 0 0 22px; }
+
+  .needs {
+    display: flex; flex-wrap: wrap; gap: 6px 18px;
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; color: var(--faint); margin: 0 0 30px; padding: 0; list-style: none;
+  }
+  .needs li::before { content: "▸ "; color: var(--teal); }
+
+  /* ---------- Route strip ---------- */
+  .route {
+    position: relative;
+    display: flex; justify-content: space-between;
+    margin: 0 4px 34px; padding: 0;
+  }
+  .route::before {
+    content: ""; position: absolute; left: 16px; right: 16px; top: 16px;
+    border-top: 2px dashed var(--line);
+  }
+  .stop { position: relative; text-decoration: none; text-align: center; width: 44px; }
+  .stop b {
+    display: grid; place-items: center; width: 32px; height: 32px; margin: 0 auto;
+    border-radius: 50%; border: 2px solid var(--line); background: var(--paper);
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px; font-weight: 700; color: var(--faint);
+    transition: background .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .stop i {
+    display: block; margin-top: 6px; font-style: normal;
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint);
+    white-space: nowrap;
+  }
+  .stop:hover b { border-color: var(--teal); color: var(--teal); }
+  .stop.part b { border-color: var(--amber); color: var(--amber); }
+  .stop.done b { border-color: var(--teal); background: var(--teal); color: var(--paper); }
+  .stop.done i { color: var(--teal); }
+  @media (max-width: 430px) { .stop i { display: none; } .stop { width: 34px; } }
+  @media (prefers-reduced-motion: reduce) { .stop b { transition: none; } }
+
+  /* ---------- App name (optional) ---------- */
+  .yourapp { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 0 0 26px; }
+  .yourapp label { font-size: 13px; color: var(--faint); }
+  .yourapp input {
+    font: inherit; font-size: 14px; color: var(--ink);
+    background: none; border: none; border-bottom: 1.5px solid var(--line);
+    padding: 3px 2px; min-width: 200px;
+  }
+  .yourapp input::placeholder { color: var(--faint); }
+  .yourapp input:focus { border-bottom-color: var(--teal); outline: none; }
+
+  /* ---------- Sticky progress ---------- */
+  .progress {
+    position: sticky; top: 0; z-index: 5;
+    display: flex; align-items: center; gap: 14px;
+    margin: 0 0 26px; padding: 12px 16px;
+    background: color-mix(in srgb, var(--card) 82%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--line); border-radius: 12px;
+  }
+  .progress .num {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums;
+    color: var(--teal); white-space: nowrap;
+  }
+  .progress .bar { flex: 1; height: 7px; background: var(--card-2); border-radius: 99px; overflow: hidden; }
+  .progress .fill {
+    height: 100%; width: 0%; border-radius: 99px;
+    background: var(--teal); transition: width .35s ease;
+  }
+  .progress .who {
+    font-size: 12.5px; color: var(--faint); white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; max-width: 200px;
+  }
+  @media (max-width: 480px) { .progress .who { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .progress .fill { transition: none; } }
+
+  /* ---------- Legend ---------- */
+  .legend { display: grid; gap: 7px; margin: 0 0 30px; font-size: 13.5px; color: var(--soft); }
+  .legend > span { display: flex; align-items: baseline; gap: 8px; }
+  .chip {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+    padding: 2px 8px; border-radius: 99px; white-space: nowrap; flex: none;
+  }
+  .chip.wait { background: var(--amber-dim); color: var(--amber); }
+  .chip.paid { background: none; border: 1px solid var(--line); color: var(--faint); }
+
+  /* ---------- Phase cards ---------- */
+  .phase {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    margin-bottom: 18px; overflow: hidden; scroll-margin-top: 68px;
+  }
+  .phase > header { display: flex; align-items: center; gap: 14px; padding: 18px 20px 14px; }
+  .phase .letter {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 700; font-size: 14px; color: var(--teal);
+    border: 2px solid var(--teal); width: 30px; height: 30px; border-radius: 50%;
+    display: grid; place-items: center; flex: none;
+  }
+  .phase.complete .letter { background: var(--teal); color: var(--paper); }
+  .phase h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.015em; margin: 0; line-height: 1.25; }
+  .phase .sub { color: var(--faint); font-size: 13px; margin-top: 2px; }
+  .phase .count {
+    margin-left: auto; align-self: flex-start;
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; white-space: nowrap;
+    padding-top: 5px;
+  }
+  .phase.complete .count { color: var(--teal); }
+
+  ul.steps { list-style: none; margin: 0; padding: 0 20px 10px; }
+  ul.steps li { border-top: 1px solid var(--line); }
+  label.step {
+    display: grid; grid-template-columns: 24px 1fr; gap: 13px;
+    padding: 14px 2px; cursor: pointer; align-items: start;
+  }
+  label.step input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .box {
+    width: 21px; height: 21px; border-radius: 6px; border: 2px solid var(--line);
+    display: grid; place-items: center; margin-top: 2px; flex: none;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .box svg { width: 12px; height: 12px; stroke: var(--paper); stroke-width: 3; fill: none; opacity: 0; }
+  input:checked + .box { background: var(--teal); border-color: var(--teal); }
+  input:checked + .box svg { opacity: 1; }
+  input:focus-visible + .box { outline: 2px solid var(--teal); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .box { transition: none; } }
+  .step .head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .step .t { font-weight: 600; font-size: 15px; }
+  .step .d { color: var(--soft); font-size: 13.8px; margin-top: 3px; max-width: 62ch; }
+  input:checked ~ .body .t {
+    color: var(--faint);
+    text-decoration: line-through; text-decoration-color: var(--line);
+  }
+  input:checked ~ .body .d { opacity: 0.55; }
+
+  /* ---------- Trap callout ---------- */
+  .trap {
+    margin: 2px 20px 18px; padding: 12px 15px;
+    background: var(--red-dim);
+    border: 1px solid color-mix(in srgb, var(--red) 30%, transparent);
+    border-left: 3px solid var(--red); border-radius: 10px;
+    font-size: 13.5px; color: var(--soft);
+  }
+  .trap b { color: var(--red); font-weight: 650; }
+  .trap .lbl {
+    display: block; margin-bottom: 4px;
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--red);
+  }
+
+  /* ---------- Outro ---------- */
+  .outro {
+    margin-top: 34px; background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 22px 22px 10px;
+  }
+  .outro h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.015em; margin: 0 0 4px; }
+  .outro p.sub { color: var(--faint); font-size: 13.5px; margin: 0 0 12px; }
+  .outro ul { list-style: none; margin: 0; padding: 0; }
+  .outro li {
+    display: grid; grid-template-columns: 20px 1fr; gap: 11px;
+    padding: 12px 0; border-top: 1px solid var(--line); font-size: 14.5px; color: var(--soft);
+  }
+  .outro li .mk { color: var(--teal); font-weight: 700; }
+  .outro li b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Template note ---------- */
+  .remix {
+    margin-top: 18px; border: 1.5px dashed var(--line); border-radius: var(--radius);
+    padding: 4px 20px; color: var(--soft); font-size: 13.8px;
+  }
+  .remix summary { cursor: pointer; padding: 12px 0; font-weight: 600; color: var(--ink); font-size: 14.5px; }
+  .remix summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .remix summary::marker { color: var(--teal); }
+  .remix p { margin: 0 0 12px; max-width: 62ch; }
+
+  footer { margin-top: 32px; text-align: center; color: var(--faint); font-size: 12.5px; line-height: 1.75; }
+  .reset {
+    background: none; border: 1px solid var(--line); color: var(--faint);
+    font: inherit; font-size: 12.5px; padding: 6px 14px; border-radius: 8px;
+    cursor: pointer; margin-top: 10px;
+  }
+  .reset:hover { color: var(--soft); border-color: var(--faint); }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">First submission · iOS · App Store</p>
+  <h1>Before App Store Launch Checklist</h1>
+  <p class="lede">
+    Every step between a finished build and a live App Store listing, in the order Apple
+    actually asks for it — written for your first launch. Tick items off as you go;
+    progress stays saved in this browser.
+  </p>
+
+  <ul class="needs">
+    <li>A finished app build</li>
+    <li>A Mac with Xcode</li>
+    <li>An Apple ID</li>
+    <li>US $99 / year</li>
+    <li>~1 week, mostly waiting</li>
+  </ul>
+
+  <nav class="route" aria-label="Checklist phases">
+    <a class="stop" href="#phase-a" data-route="A"><b>A</b><i>Program</i></a>
+    <a class="stop" href="#phase-b" data-route="B"><b>B</b><i>Banking</i></a>
+    <a class="stop" href="#phase-c" data-route="C"><b>C</b><i>Record</i></a>
+    <a class="stop" href="#phase-d" data-route="D"><b>D</b><i>Purchases</i></a>
+    <a class="stop" href="#phase-e" data-route="E"><b>E</b><i>Listing</i></a>
+    <a class="stop" href="#phase-f" data-route="F"><b>F</b><i>Upload</i></a>
+    <a class="stop" href="#phase-g" data-route="G"><b>G</b><i>Review</i></a>
+  </nav>
+
+  <div class="yourapp">
+    <label for="appname">Tracking your own launch?</label>
+    <input type="text" id="appname" maxlength="40" placeholder="Your app's name (optional)" autocomplete="off">
+  </div>
+
+  <div class="progress">
+    <span class="num" id="pnum">0 / 0</span>
+    <div class="bar"><div class="fill" id="pfill"></div></div>
+    <span class="who" id="pwho">Saved in this browser</span>
+  </div>
+
+  <div class="legend">
+    <span><span class="chip wait">Wait</span> Apple's clock, not yours — start these early and do other phases meanwhile.</span>
+    <span><span class="chip paid">Paid / IAP</span> Only needed if you charge anything: a paid app, in-app purchase, or subscription.</span>
+  </div>
+
+  <!-- PHASE A -->
+  <section class="phase" id="phase-a" data-phase="A">
+    <header>
+      <span class="letter">A</span>
+      <div>
+        <h2>Join the Apple Developer Program</h2>
+        <div class="sub">US $99 / year · approval usually within 48 hours</div>
+      </div>
+      <span class="count"></span>
+    </header>
+    <ul class="steps">
+      <li><label class="step"><input type="checkbox" data-id="a1"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Turn on two-factor authentication for your Apple ID</span></div><div class="d">Mandatory for the program. Do it at <a href="https://appleid.apple.com" rel="noopener">appleid.apple.com</a> or in Settings on your iPhone.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="a2"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Start enrollment</span></div><div class="d">Go to <a href="https://developer.apple.com/programs/enroll/" rel="noopener">developer.apple.com/programs/enroll</a>, sign in, and follow the identity check — Apple may ask for a photo of a government ID. Then pay the fee.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="a3"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Choose entity type: Individual / Sole Proprietor</span></div><div class="d">The right choice for a solo developer. Your personal name appears as the seller; you can convert to a company later.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="a4"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Wait for the approval email</span><span class="chip wait">Wait</span></div><div class="d">Often same-day, sometimes up to two days. Once it lands, your account can sign and submit real apps.</div></div></label></li>
+    </ul>
+    <div class="trap"><span class="lbl">Trap</span>Do <b>not</b> pick <b>Organization / Company</b> unless you have a registered legal business — it requires a <b>D-U-N-S number</b> and can take weeks. Individual accounts can sell paid apps just the same.</div>
+  </section>
+
+  <!-- PHASE B -->
+  <section class="phase" id="phase-b" data-phase="B">
+    <header>
+      <span class="letter">B</span>
+      <div>
+        <h2>Agreements, tax &amp; banking</h2>
+        <div class="sub">The phase first-timers discover too late — skip only if your app is 100% free</div>
+      </div>
+      <span class="count"></span>
+    </header>
+    <ul class="steps">
+      <li><label class="step"><input type="checkbox" data-id="b1"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Open Agreements, Tax, and Banking</span><span class="chip paid">Paid / IAP</span></div><div class="d">In <a href="https://appstoreconnect.apple.com/" rel="noopener">App Store Connect</a> → <b>Business</b>. You'll see the Paid Apps agreement listed as <i>pending</i>.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="b2"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Accept the Paid Applications Agreement</span><span class="chip paid">Paid / IAP</span></div><div class="d">The legal contract that lets you charge for anything — a paid app, in-app purchases, or subscriptions.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="b3"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Add your bank account and tax forms</span><span class="chip paid">Paid / IAP</span><span class="chip wait">Wait</span></div><div class="d">Bank details for payouts plus tax forms. Outside the US, that typically means the US <code>W-8BEN</code> form plus your local details — the questionnaire walks you through it.</div></div></label></li>
+    </ul>
+    <div class="trap"><span class="lbl">The big one</span>The Paid Apps agreement must read <b>Active</b> — not Pending — before you can submit an app that charges money, and bank verification alone can take days. <b>Start this phase early</b>, in parallel with everything else, so it isn't the thing you're stuck waiting on at the end.</div>
+  </section>
+
+  <!-- PHASE C -->
+  <section class="phase" id="phase-c" data-phase="C">
+    <header>
+      <span class="letter">C</span>
+      <div>
+        <h2>Create your app record</h2>
+        <div class="sub">Reserve the name and register your app's identity</div>
+      </div>
+      <span class="count"></span>
+    </header>
+    <ul class="steps">
+      <li><label class="step"><input type="checkbox" data-id="c1"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Register your bundle ID</span></div><div class="d">At <a href="https://developer.apple.com/account/" rel="noopener">developer.apple.com</a> → Certificates, Identifiers &amp; Profiles → Identifiers → <b>+</b> → App ID. Use reverse-DNS style, e.g. <code data-fill="bundleId">com.yourname.yourapp</code> — it must match the bundle identifier in Xcode exactly.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="c2"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Create the app in App Store Connect</span></div><div class="d">Apps → <b>+</b> → New App. Pick the platform, your app's name, primary language, the bundle ID from the previous step, and an SKU — any internal code, e.g. <code data-fill="sku">YOURAPP001</code>; customers never see it.</div></div></label></li>
+    </ul>
+    <div class="trap"><span class="lbl">Trap</span>The app name must be <b>unique across the entire App Store</b> and at most 30 characters. Have a backup ready — a distinct display name like "<span data-fill="backupName">YourApp: Short Tagline</span>" — and keep the short version as the subtitle.</div>
+  </section>
+
+  <!-- PHASE D -->
+  <section class="phase" id="phase-d" data-phase="D">
+    <header>
+      <span class="letter">D</span>
+      <div>
+        <h2>In-app purchases &amp; subscriptions</h2>
+        <div class="sub">Skip this phase entirely if your app is free with no purchases</div>
+      </div>
+      <span class="count"></span>
+    </header>
+    <ul class="steps">
+      <li><label class="step"><input type="checkbox" data-id="d1"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Create your products in App Store Connect</span><span class="chip paid">Paid / IAP</span></div><div class="d">Your app → In-App Purchases (or Subscriptions, which also need a subscription group). Set the type, price, and duration for each product.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="d2"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Match every product ID to your code — character for character</span><span class="chip paid">Paid / IAP</span></div><div class="d">The product ID in App Store Connect and the one in your code must be identical — e.g. <code data-fill="productId">com.yourname.yourapp.pro.monthly</code>. A single character off and the buy button silently does nothing — no error, no sale.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="d3"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Add display name, description, and a review screenshot</span><span class="chip paid">Paid / IAP</span></div><div class="d">Each product needs a customer-facing localized name and description, plus one screenshot of your purchase screen for the review team.</div></div></label></li>
+    </ul>
+    <div class="trap"><span class="lbl">Trap</span>Brand-new purchases are reviewed <b>together with your first app version</b> — you attach them to the 1.0 submission in Phase G, not before. Until then they sit as "Ready to Submit", which is normal, not an error.</div>
+  </section>
+
+  <!-- PHASE E -->
+  <section class="phase" id="phase-e" data-phase="E">
+    <header>
+      <span class="letter">E</span>
+      <div>
+        <h2>Store listing, privacy &amp; assets</h2>
+        <div class="sub">Everything reviewers and customers see — most first rejections happen here</div>
+      </div>
+      <span class="count"></span>
+    </header>
+    <ul class="steps">
+      <li><label class="step"><input type="checkbox" data-id="e1"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Write a privacy policy and host it at a public URL</span></div><div class="d">Required for <b>every</b> app — even free ones that collect nothing. A single honest page is fine; GitHub Pages is a free place to host it. Paste the URL into your app's App Privacy section.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="e2"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Answer the App Privacy questionnaire</span></div><div class="d">The "nutrition label" shown on your store page. Answer for what the app <i>actually</i> does — third-party SDKs count: ads and analytics libraries collect data even if you don't.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="e3"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Take screenshots at the required sizes</span></div><div class="d">Shoot on the largest current iPhone (simulator screenshots are fine), plus an iPad set if your app runs on iPad. App Store Connect shows the exact required sizes — treat what it displays as the source of truth; the sizes change over the years.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="e4"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Write the listing copy</span></div><div class="d">Description, subtitle (max 30 characters), keywords (max 100 characters, comma-separated, no need to repeat the name), optional promo text, and a support URL — a simple contact page or email link is enough.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="e5"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Set the age rating and category</span></div><div class="d">The age rating comes from a short questionnaire about your content. Pick a primary category that matches what the app really is.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="e6"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Answer export compliance</span></div><div class="d">Apps that only use standard HTTPS are typically exempt. Add <code>ITSAppUsesNonExemptEncryption = NO</code> to your Info.plist and uploads skip the question automatically.</div></div></label></li>
+    </ul>
+    <div class="trap"><span class="lbl">Trap</span>Reviewers open your links. The privacy policy URL must <b>actually load</b>, and your privacy answers must <b>match what the app really does</b> — a mismatch between the label, the policy, and the binary is one of the most common first-time rejections.</div>
+  </section>
+
+  <!-- PHASE F -->
+  <section class="phase" id="phase-f" data-phase="F">
+    <header>
+      <span class="letter">F</span>
+      <div>
+        <h2>Upload the build</h2>
+        <div class="sub">From Xcode to App Store Connect</div>
+      </div>
+      <span class="count"></span>
+    </header>
+    <ul class="steps">
+      <li><label class="step"><input type="checkbox" data-id="f1"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Select your paid team for signing</span></div><div class="d">In Xcode → Signing &amp; Capabilities, choose your Developer Program team and leave "Automatically manage signing" on — Xcode creates the distribution certificate for you.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="f2"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Archive and upload</span></div><div class="d">Version <b>1.0</b>, build <b>1</b> is right for a first submission. Set the destination to "Any iOS Device", then <b>Product → Archive</b>, and in the Organizer: <b>Distribute App → App Store Connect → Upload</b>.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="f3"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Wait for processing</span><span class="chip wait">Wait</span></div><div class="d">Usually 15–60 minutes, then the build appears in App Store Connect under your 1.0 version and in TestFlight.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="f4"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Run through it once via TestFlight</span></div><div class="d">Optional but smart: install the processed build on your own phone through TestFlight and try everything once. It's the exact binary reviewers will get.</div></div></label></li>
+    </ul>
+  </section>
+
+  <!-- PHASE G -->
+  <section class="phase" id="phase-g" data-phase="G">
+    <header>
+      <span class="letter">G</span>
+      <div>
+        <h2>Submit for review</h2>
+        <div class="sub">Attach everything, answer honestly, send it</div>
+      </div>
+      <span class="count"></span>
+    </header>
+    <ul class="steps">
+      <li><label class="step"><input type="checkbox" data-id="g1"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Attach the build — and any new purchases</span></div><div class="d">On the 1.0 version page, select the processed build. If you created in-app purchases or subscriptions in Phase D, add them to this same submission so they're reviewed together.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="g2"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Fill in the review notes</span></div><div class="d">If your app requires a login, provide a <b>working demo account</b> — the single most common first-timer rejection. Add a line or two explaining what the app does and how to reach anything non-obvious.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="g3"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Choose how it releases</span></div><div class="d">Automatically as soon as it's approved, manually when you press the button, or phased. Manual is a calm choice for a first launch — approval can land at 3 a.m.</div></div></label></li>
+      <li><label class="step"><input type="checkbox" data-id="g4"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="3,8 6.5,11.5 13,4"/></svg></span><div class="body"><div class="head"><span class="t">Submit</span><span class="chip wait">Wait</span></div><div class="d">Review typically takes 24–48 hours. When the "Ready for Sale" email arrives — that's it. Your app is on the App Store.</div></div></label></li>
+    </ul>
+    <div class="trap"><span class="lbl">If it gets rejected</span>Don't panic — first submissions get rejected all the time, usually for small fixable things. Read the message in the <b>Resolution Center</b>, fix exactly what it names, and resubmit; the second review is usually faster. It's a conversation, not a verdict.</div>
+  </section>
+
+  <!-- OUTRO -->
+  <div class="outro">
+    <h2>Approved? You're live 🎉</h2>
+    <p class="sub">Three small habits for your first week on the store.</p>
+    <ul>
+      <li><span class="mk">→</span><div><b>Release it</b> — if you chose manual release, the button is on your app's page in App Store Connect.</div></li>
+      <li><span class="mk">→</span><div><b>Watch crashes</b> — Xcode's Organizer and App Store Connect show crash reports from real devices. Quiet is good news.</div></li>
+      <li><span class="mk">→</span><div><b>Reply to early reviews</b> — responses come from you, the developer, and first users notice. Updates go through review too, but usually faster.</div></li>
+    </ul>
+  </div>
+
+  <!-- TEMPLATE NOTE -->
+  <details class="remix">
+    <summary>Make this checklist yours — with any AI assistant</summary>
+    <p>This page is a template. The structure is fixed, but a few marked spots — the app name, bundle ID, SKU, and product ID examples — are placeholders meant to be swapped for your project's real values.</p>
+    <p>Send this page's link or source code to Claude (or any AI assistant) and say, for example: <i>"Personalize this checklist for my app Luma, bundle ID com.jane.luma."</i> The assistant only needs to fill in the small <code>PERSONALIZE</code> block at the top of the source — instructions for it are embedded right there — and hand you back your own copy.</p>
+    <p>And without any AI: the name field above already personalizes tracking in this browser.</p>
+  </details>
+
+  <footer>
+    Independent community checklist — not affiliated with Apple. Details like screenshot sizes and fees change over time;
+    treat what App Store Connect shows you as the source of truth.<br>
+    Your progress and app name are saved only in this browser — nothing is sent anywhere.<br>
+    Open source — <a href="https://github.com/sweetato-nds/app-store-launch-checklist" rel="noopener">source on GitHub</a> · <a href="https://github.com/sweetato-nds/app-store-launch-checklist/issues" rel="noopener">send feedback</a><br>
+    <button class="reset" id="reset">Reset checklist</button>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var P = window.PROJECT || {};
+
+    /* Inject personalized values into the marked placeholder spots. */
+    function fill(name, value) {
+      if (!value) return;
+      Array.prototype.forEach.call(document.querySelectorAll('[data-fill="' + name + '"]'), function (el) {
+        el.textContent = value;
+      });
+    }
+    fill("bundleId", P.bundleId);
+    fill("sku", P.sku);
+    fill("productId", P.productId);
+    fill("backupName", P.appName ? P.appName + ": Short Tagline" : "");
+    if (P.appName) document.title = P.appName + " — App Store Launch Checklist";
+
+    /* Each personalized copy keeps its own saved progress. */
+    var slug = String(P.appName || "shared").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "shared";
+    var KEY = "appstore-launch-" + slug + "-v1";
+    var state = { checks: {}, name: "" };
+    try {
+      var raw = JSON.parse(localStorage.getItem(KEY) || (slug === "shared" ? localStorage.getItem("appstore-first-launch-v1") : null) || "{}");
+      if (raw && typeof raw === "object") {
+        state.checks = raw.checks || {};
+        state.name = typeof raw.name === "string" ? raw.name : "";
+      }
+    } catch (e) {}
+
+    var boxes = Array.prototype.slice.call(document.querySelectorAll("input[type=checkbox]"));
+    var nameInput = document.getElementById("appname");
+    var pnum = document.getElementById("pnum");
+    var pfill = document.getElementById("pfill");
+    var pwho = document.getElementById("pwho");
+
+    function persist() {
+      state.checks = {};
+      boxes.forEach(function (b) { state.checks[b.dataset.id] = b.checked; });
+      state.name = nameInput.value.trim();
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    function updateAll() {
+      var total = boxes.length, done = 0;
+      boxes.forEach(function (b) { if (b.checked) done++; });
+      pnum.textContent = done + " / " + total;
+      pfill.style.width = (total ? (done / total) * 100 : 0) + "%";
+
+      var name = nameInput.value.trim();
+      pwho.textContent = done === total
+        ? "Ready to submit — good luck 🚀"
+        : (name ? name : "Saved in this browser");
+
+      Array.prototype.forEach.call(document.querySelectorAll(".phase"), function (section) {
+        var ins = section.querySelectorAll("input[type=checkbox]");
+        var d = 0;
+        Array.prototype.forEach.call(ins, function (b) { if (b.checked) d++; });
+        section.querySelector(".count").textContent = d + " / " + ins.length;
+        section.classList.toggle("complete", d === ins.length);
+
+        var stop = document.querySelector('.stop[data-route="' + section.dataset.phase + '"]');
+        if (stop) {
+          stop.classList.toggle("done", d === ins.length);
+          stop.classList.toggle("part", d > 0 && d < ins.length);
+          stop.title = "Phase " + section.dataset.phase + ": " + d + " / " + ins.length + " done";
+        }
+      });
+    }
+
+    boxes.forEach(function (b) {
+      if (b.dataset.id in state.checks) b.checked = !!state.checks[b.dataset.id];
+      b.addEventListener("change", function () { persist(); updateAll(); });
+    });
+
+    if (!state.name && P.appName) state.name = P.appName;
+    nameInput.value = state.name;
+    nameInput.addEventListener("input", function () { persist(); updateAll(); });
+
+    document.getElementById("reset").addEventListener("click", function () {
+      if (!confirm("Clear all checked items?")) return;
+      boxes.forEach(function (b) { b.checked = false; });
+      persist(); updateAll();
+    });
+
+    updateAll();
+  })();
+</script>
